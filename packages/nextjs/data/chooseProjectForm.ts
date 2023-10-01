@@ -8,10 +8,10 @@ export const ChooseProjectForm: FormType[] = [
     name: "company",
   },
   {
-    label: "Invesment",
+    label: "Investment",
     type: "number",
     value: 0,
-    name: "invesment",
+    name: "investment",
   },
   {
     label: "Project",

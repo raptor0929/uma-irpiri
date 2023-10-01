@@ -1,7 +1,7 @@
-import Image from "next/image";
+import CreateSbt from "~~/components/CreateSbt";
 import { ReusableForm } from "~~/components/common/ReusableForm";
 import { RegisterProjectForm } from "~~/data/registerProjectForm";
-
+import Image from "next/image";
 const ChooseWatterEntity = () => {
   return (
     <div className="flex justify-center flex-row flex-wrap py-5">
@@ -12,6 +12,7 @@ const ChooseWatterEntity = () => {
       <div className="m-5 shadow-md bg-white rounded-lg p-6 cursor-crosshair">
         <Image className="rounded-lg " src="/Assets/map.png" alt="" width={500} height={0} />
       </div>
+      <CreateSbt />
     </div>
   );
 };
