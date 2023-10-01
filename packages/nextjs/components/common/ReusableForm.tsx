@@ -4,12 +4,13 @@ import { FormType } from "~~/types/form.type";
 
 type Props = {
   formData: FormType[];
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   buttonLabel: string;
+  disabled: boolean;
 };
 
-export const ReusableForm: FC<Props> = ({ formData, buttonLabel }) => {
+export const ReusableForm: FC<Props> = ({ formData, buttonLabel, onChange, onSubmit, disabled }) => {
   return (
     <form className="h-full px-9">
       <div className="flex flex-col justify-between align-middle">
@@ -25,8 +26,8 @@ export const ReusableForm: FC<Props> = ({ formData, buttonLabel }) => {
                   <Dropdown
                     items={!!field.options ? field.options : []}
                     name={field.name}
-                    value={0}
-                    onChange={() => {}}
+                    value={!!field.value ? (field.value as number) : 0}
+                    onChange={onChange}
                   />
                 </div>
               ) : (
@@ -36,16 +37,17 @@ export const ReusableForm: FC<Props> = ({ formData, buttonLabel }) => {
                   name={field.name}
                   value={field.value.toString()}
                   id={field.name}
-                  //onChange={() => {}}
+                  onChange={onChange}
                 />
               )}
             </div>
           ))}
         </div>
         <button
-          className=" bg-sky-300 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
+          className="disabled:opacity-50 disabled:cursor-not-allowed bg-sky-300 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
           type="button"
-          disabled={false}
+          disabled={disabled}
+          onClick={(event: any) => onSubmit(event)}
         >
           {buttonLabel}
         </button>

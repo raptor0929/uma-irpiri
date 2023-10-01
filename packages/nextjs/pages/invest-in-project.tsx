@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { BannerCard } from "~~/components/common/BannerCard";
 import { ProgressBar } from "~~/components/common/ProgressBar";
 import { ReusableForm } from "~~/components/common/ReusableForm";
-import { ChooseProjectForm } from "~~/data/chooseProjectForm";
-// Importa los estilos básicos de Swiper
-
-// Instala los módulos necesarios
+import { FormType } from "~~/types/form.type";
 
 const progress = [
   {
@@ -19,8 +16,73 @@ const progress = [
     color: "yellow",
   },
 ];
-
+interface FormValues {
+  company: string;
+  investment: number;
+  project: number;
+}
 const InvestInProject = () => {
+  const [formData, setFormData] = useState<FormValues>({
+    company: "",
+    investment: 0,
+    project: 1,
+  });
+
+  const ChooseProjectForm: FormType[] = [
+    {
+      label: "Company",
+      type: "text",
+      value: formData.company,
+      name: "company",
+    },
+    {
+      label: "Amount to Invest",
+      type: "number",
+      value: formData.investment,
+      name: "investment",
+    },
+    {
+      label: "Project",
+      type: "select",
+      value: formData.project,
+      name: "project",
+      options: [
+        {
+          id: 1,
+          name: "project one",
+          value: 0,
+        },
+        {
+          id: 2,
+          name: "project two",
+          value: 2,
+        },
+
+        {
+          id: 3,
+          name: "project three",
+          value: 3,
+        },
+      ],
+    },
+  ];
+  const setDisable = () => {
+    return formData.company != "" && formData.investment != 0;
+  };
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div className="flex justify-center flex-row flex-wrap ">
       <div className=" m-5">
@@ -37,7 +99,13 @@ const InvestInProject = () => {
       </div>
       <div className="bg-white shadow-md mt-5 rounded-lg" style={{ height: "32.3rem", width: "32rem" }}>
         <h2 className=" text-center text-2xl pt-5">Invest in Project</h2>
-        <ReusableForm formData={ChooseProjectForm} buttonLabel="Invest"/>
+        <ReusableForm
+          formData={ChooseProjectForm}
+          buttonLabel="Invest"
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          disabled={!setDisable()}
+        />
       </div>
     </div>
   );
