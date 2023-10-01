@@ -1,6 +1,5 @@
 import { FormType } from "~~/types/form.type";
 
-
 export const RegisterProjectForm: FormType[] = [
   {
     label: "Community Name",
@@ -11,13 +10,25 @@ export const RegisterProjectForm: FormType[] = [
   {
     label: "Location",
     type: "text",
-    name: "Location",
+    name: "location",
+    value: "",
+  },
+  {
+    label: "Amount Needed (USD)",
+    type: "number",
+    name: "location",
+    value: "",
+  },
+  {
+    label: "Water Contamination Percentage (%)",
+    type: "number",
+    name: "location",
     value: "",
   },
   {
     label: "Contamination Type",
     type: "select",
-    name: "phisical",
+    name: "contamination",
     value: 0,
     options: [
       {
