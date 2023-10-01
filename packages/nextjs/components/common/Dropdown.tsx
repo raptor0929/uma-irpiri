@@ -10,7 +10,7 @@ type Props = {
 export const Dropdown: FC<Props> = ({ items = [], onChange, name, value = 0 }) => {
   return (
     <select
-      className="shadow border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-200"
+      className="shadow border rounded w-full py-3 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-200 "
       id="default"
       onChange={onChange}
       name={name}
