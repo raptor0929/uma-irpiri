@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import Link from "next/link";
 import { ReusableForm } from "./common/ReusableForm";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { useBurnerWallet, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { FormType } from "~~/types/form.type";
 
 interface FormState {
@@ -59,12 +60,27 @@ const CreateSbt = () => {
     dispatch({ type: "SET_FIELD", field: name, value });
   };
 
+  const { account } = useBurnerWallet();
+
+  const { writeAsync, isLoading } = useScaffoldContractWrite({
+    contractName: "UmaIrpiri",
+    functionName: "crearUmaSBT",
+    args: [account?.address, formData.name, formData.country, BigInt(1)],
+    // value: "0.01",
+    onBlockConfirmation: (txnReceipt: { blockHash: any }) => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Datos del formulario:", formData);
+    writeAsync();
+    debugger;
   };
+
   const setDisabled = () => {
-    return formData.country !== "" && formData.email !== "" && formData.name !== "";
+    return (formData.country !== "" && formData.email !== "" && formData.name !== "") || isLoading;
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

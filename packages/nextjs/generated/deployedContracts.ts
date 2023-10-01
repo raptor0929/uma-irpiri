@@ -5,7 +5,7 @@ const contracts = {
       name: "localhost",
       contracts: {
         UmaIrpiri: {
-          address: "0xD84379CEae14AA33C123Af12424A37803F885889",
+          address: "0xC9a43158891282A2B1475592D5719c001986Aaec",
           abi: [
             {
               inputs: [
@@ -584,7 +584,7 @@ const contracts = {
           ],
         },
         UmaSBT: {
-          address: "0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25",
+          address: "0x46b142DD1E924FAb83eCc3c08e4D46E82f005e0E",
           abi: [
             {
               inputs: [],
@@ -955,6 +955,40 @@ const contracts = {
               type: "function",
             },
             {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              name: "souls",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "identity",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "country",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
               inputs: [],
               name: "ticker",
               outputs: [
@@ -1010,7 +1044,7 @@ const contracts = {
           ],
         },
         UmaToken: {
-          address: "0x4EE6eCAD1c2Dae9f525404De8555724e3c35d07B",
+          address: "0xfbC22278A96299D91d41C453234d97b4F5Eb9B2d",
           abi: [
             {
               inputs: [],
@@ -1360,7 +1394,7 @@ const contracts = {
           ],
         },
         YourContract: {
-          address: "0x172076E0166D1F9Cc711C77Adf8488051744980C",
+          address: "0x2B0d36FACD61B71CC05ab8F3D2355ec3631C0dd5",
           abi: [
             {
               inputs: [

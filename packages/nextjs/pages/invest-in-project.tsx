@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BannerCard } from "~~/components/common/BannerCard";
 import { ProgressBar } from "~~/components/common/ProgressBar";
 import { ReusableForm } from "~~/components/common/ReusableForm";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { FormType } from "~~/types/form.type";
 
 const progress = [
@@ -36,7 +37,7 @@ const InvestInProject = () => {
       name: "company",
     },
     {
-      label: "Amount to Invest",
+      label: "Amount to Invest(ETH)",
       type: "number",
       value: formData.investment,
       name: "investment",
@@ -66,8 +67,18 @@ const InvestInProject = () => {
       ],
     },
   ];
+
+  const { writeAsync, isLoading } = useScaffoldContractWrite({
+    contractName: "UmaIrpiri",
+    functionName: "comprarUmaToken",
+    value: `${formData.investment}`,
+    onBlockConfirmation: (txnReceipt: { blockHash: any }) => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
   const setDisable = () => {
-    return formData.company != "" && formData.investment != 0;
+    return (formData.company != "" && formData.investment != 0) || isLoading;
   };
 
   const handleChange = (event: any) => {
@@ -81,6 +92,7 @@ const InvestInProject = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     console.log(formData);
+    writeAsync();
   };
 
   return (

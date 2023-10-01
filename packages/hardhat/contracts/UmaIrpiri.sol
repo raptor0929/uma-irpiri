@@ -133,7 +133,7 @@ contract UmaIrpiri {
         if (!umasbtInstance.hasSoul(_cuenta)) {
             console.log(_soulData.identity, _soulData.name, _soulData.country, _soulData.timestamp);
             umasbtInstance.mint(_cuenta, _soulData);
-        } 
+        }
         emit umaSBTcreated(_cuenta, sbtCount-1, _name, "SBT minted successfully!");
     }
 
