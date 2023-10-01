@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaucetButton, RainbowKitCustomConnectButton } from "./scaffold-eth";
-import { Bars3Icon, CurrencyDollarIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BookOpenIcon, CurrencyDollarIcon, HandRaisedIcon } from "@heroicons/react/24/outline";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -49,6 +49,12 @@ export const Header = () => {
         <NavLink href="/invest-in-project">
           <CurrencyDollarIcon className="h-4 w-4" />
           Invest in a project
+        </NavLink>
+      </li>
+      <li>
+        <NavLink href="/my-projects">
+          <BookOpenIcon className="h-4 w-4" />
+          My Projects
         </NavLink>
       </li>
     </>
