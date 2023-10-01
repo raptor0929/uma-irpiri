@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
-import CreateSbt from "~~/components/CreateSbt";
+// import CreateSbt from "~~/components/CreateSbt";
 import { ReusableForm } from "~~/components/common/ReusableForm";
-import { useBurnerWallet, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useBurnerWallet, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { FormType } from "~~/types/form.type";
 
 interface FormValues {
@@ -68,11 +68,11 @@ const ChooseWatterEntity = () => {
 
   const { account } = useBurnerWallet();
 
-  const { data: hasSoul } = useScaffoldContractRead({
-    contractName: "UmaSBT",
-    functionName: "hasSoul",
-    args: [account?.address],
-  });
+  // const { data: hasSoul } = useScaffoldContractRead({
+  //   contractName: "UmaSBT",
+  //   functionName: "hasSoul",
+  //   args: [account?.address],
+  // });
 
   const { writeAsync, isLoading } = useScaffoldContractWrite({
     contractName: "UmaIrpiri",
@@ -128,7 +128,6 @@ const ChooseWatterEntity = () => {
       <div className="flex m-5 shadow-md bg-white rounded-lg p-6 cursor-crosshair" style={{ height: "42rem" }}>
         <Image className="rounded-lg " src="/Assets/map.png" alt="" width={500} height={0} />
       </div>
-      {!hasSoul && <CreateSbt />}
     </div>
   );
 };

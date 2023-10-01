@@ -57,6 +57,9 @@ export const Header = () => {
           My Projects
         </NavLink>
       </li>
+      <li>
+        <NavLink href="/create-sbt">Registra tu comunidad</NavLink>
+      </li>
     </>
   );
 
