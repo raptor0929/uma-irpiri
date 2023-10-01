@@ -1,4 +1,8 @@
 const ChooseWatterEntity = () => {
-  return <h1>water entity</h1>;
+  return (
+    <div className="">
+
+    </div>
+  )
 };
 export default ChooseWatterEntity;
