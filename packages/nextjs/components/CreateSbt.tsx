@@ -25,7 +25,7 @@ const CreateSbt = () => {
         </div>
         <div className="ml-8 mt-[-20px]">
           <Link className="text-red-500 hover:text-red-700 underline" href={"/"}>
-            Volver
+            Go Back
           </Link>
         </div>
       </div>
