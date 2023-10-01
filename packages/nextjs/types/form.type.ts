@@ -1,5 +1,5 @@
 export interface OptionType {
-  index: number;
+  id: number;
   value: number;
   name: string;
 }
