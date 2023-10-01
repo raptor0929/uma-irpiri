@@ -1,16 +1,47 @@
+// import { useReducer } from "react";
 import Link from "next/link";
 import { ReusableForm } from "./common/ReusableForm";
 import { MintSbt } from "~~/data/mintSbt";
 
-const CreateSbt = () => {
-  // const [modalOpen, setModalOpen] = useState(false);
+// interface FormState {
+//   name: string;
+//   email: string;
+//   country: string;
+// }
 
-  // const openModal = () => {
-  //   setModalOpen(true);
+// type FormAction = { type: "SET_FIELD"; field: string; value: string } | { type: "RESET" };
+
+// const initialState: FormState = {
+//   name: "",
+//   email: "",
+//   country: "",
+// };
+
+// const formReducer = (state: FormState, action: FormAction): FormState => {
+//   switch (action.type) {
+//     case "SET_FIELD":
+//       return {
+//         ...state,
+//         [action.field]: action.value,
+//       };
+//     case "RESET":
+//       return initialState;
+//     default:
+//       return state;
+//   }
+// };
+
+const CreateSbt = () => {
+  // const [formData, dispatch] = useReducer(formReducer, initialState);
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   dispatch({ type: "SET_FIELD", field: name, value });
   // };
 
-  // const closeModal = () => {
-  //   setModalOpen(false);
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log("Datos del formulario:", formData);
   // };
 
   return (
