@@ -16,13 +16,6 @@ import "hardhat/console.sol";
 //     function mint(address to, uint256 amount) external;
 // }
 
-struct Soul {
-        string identity;
-        string name;
-        string country;
-        uint256 timestamp;
-    }
-
 // // Llamada de las funciones Uma SBT
 // interface UmaSBT { 
 //     function hasSoul(address _soul) external view returns (bool);
@@ -63,6 +56,7 @@ contract UmaIrpiri {
         uint256 presupuesto;
         string longitud_latitud;
         uint8 nivelDesconta;
+        address wallet;
     }
     
     uint256 public balanceSC;
@@ -72,7 +66,8 @@ contract UmaIrpiri {
 
     mapping(address => bool) public inversorLista;
     mapping(address => bool) public postulaLista;
-    Proyecto[] public proyectoLista;
+    Proyecto[] public projectList;
+    
     mapping(uint8 => mapping(address => uint256)) public listaProyectosVotados;
    
     constructor() {
@@ -89,7 +84,8 @@ contract UmaIrpiri {
             string memory _descripcion,
             uint256 presupuesto,
             string memory _longitud_latitud,
-            uint8 _nivelDesconta
+            uint8 _nivelDesconta,
+            address _wallet
         ) public 
         {
         // requires y otros
@@ -101,7 +97,8 @@ contract UmaIrpiri {
             descripcion: _descripcion,
             presupuesto: presupuesto,
             longitud_latitud: _longitud_latitud,
-            nivelDesconta: _nivelDesconta
+            nivelDesconta: _nivelDesconta,
+            wallet: _wallet
             });
 
     //         struct Proyecto {
@@ -115,7 +112,7 @@ contract UmaIrpiri {
 
             require(umasbtInstance.hasSoul(msg.sender), "UmaSBT necesario para crear proyecto");
             registroProyectos[msg.sender].push(numProy++);
-            proyectoLista.push(_newProyecto);
+            projectList.push(_newProyecto);
 
             emit createUmaProject(msg.sender, numProy-1, "Project created successfully!");
             // otorgar SBT
@@ -151,16 +148,18 @@ contract UmaIrpiri {
     }
     
     // Comprar token UMAToken para invertir
-    function comprarUmaToken() external payable
-        {   uint256 _miUma = 1000 * (msg.value / (10 ** 18));
-            require(msg.value >= 0 ,"Debe ser mayor que cero");
-            // address _cuentaSC = address(this);
-            umatokenInstance.mint(msg.sender,_miUma);
-            // bool exitoTransfer = umatokenInstance.transferFrom(_cuenta, amount);
-            //uint256 _balance = umatokenInstance.balanceOf(_account);
-            InversorBalance[msg.sender] = msg.value;
-            emit purchaseUmaToken(msg.sender, _miUma, InversorBalance[msg.sender], "Token purchased successfully!");
-        }
+    function comprarUmaToken() external payable {
+        uint256 _miUma = 1000 * (msg.value / (10 ** 18));
+        require(msg.value >= 0 ,"Debe ser mayor que cero");
+        // address _cuentaSC = address(this);
+        umatokenInstance.mint(msg.sender,_miUma);
+        // bool exitoTransfer = umatokenInstance.transferFrom(_cuenta, amount);
+        //uint256 _balance = umatokenInstance.balanceOf(_account);
+        InversorBalance[msg.sender] = msg.value;
+        // quad
+
+        emit purchaseUmaToken(msg.sender, _miUma, InversorBalance[msg.sender], "Token purchased successfully!");
+    }
 
 
     // Inicio del Proyecto
@@ -184,5 +183,13 @@ contract UmaIrpiri {
     function removeFromInversorlist(address _cuenta) public //onlyRole(DEFAULT_ADMIN_ROLE)
      {
         inversorLista[_cuenta] = false;
+    }
+
+    function accessProjectAtIndex(uint256 index) public view returns (Proyecto memory) {
+        return projectList[index];
+    }
+
+    function getNumProy() public view returns (uint256) {
+        return numProy;
     }
 }
