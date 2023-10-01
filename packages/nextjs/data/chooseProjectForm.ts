@@ -21,18 +21,18 @@ export const ChooseProjectForm: FormType[] = [
     name: "company",
     options: [
       {
-        index: 1,
+        id: 1,
         name: "project one",
         value: 0,
       },
       {
-        index: 2,
+        id: 2,
         name: "project two",
         value: 2,
       },
 
       {
-        index: 3,
+        id: 3,
         name: "project three",
         value: 3,
       },
