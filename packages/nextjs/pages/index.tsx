@@ -7,7 +7,7 @@ const cards = [
   {
     index: 1,
     title: "bad river",
-    image: "/Assets/",
+    image: "/assets/bad-1.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
@@ -16,7 +16,7 @@ const cards = [
   {
     index: 2,
     title: "bad river",
-    image: "",
+    image: "/assets/bad-2.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
@@ -25,7 +25,7 @@ const cards = [
   {
     index: 3,
     title: "bad river",
-    image: "",
+    image: "/assets/bad-3.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
@@ -34,7 +34,7 @@ const cards = [
   {
     index: 4,
     title: "bad river",
-    image: "",
+    image: "/assets/bad-2.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
@@ -43,7 +43,7 @@ const cards = [
   {
     index: 5,
     title: "bad river",
-    image: "",
+    image: "/assets/bad-3.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
@@ -52,7 +52,7 @@ const cards = [
   {
     index: 6,
     title: "bad river",
-    image: "",
+    image: "/assets/bad-1.jpeg",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     waterPurity: 45,
