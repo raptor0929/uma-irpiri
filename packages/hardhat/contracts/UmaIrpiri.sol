@@ -41,9 +41,6 @@ contract UmaIrpiri {
     UmaSBT.Soul public _soulData;
     uint256 public numProy;
     uint256 public sbtCount;
-    // error CantidadIncorrectaEth();
-    // event ProyectoCreado();  SubastaCreada();
-    // emit SubastaCreadaPr(_auctionId, msg.sender);
 
     event purchaseUmaToken(address account, uint256 tokenAmount, uint256 investmentBalanceEth, string  message);
     event umaSBTcreated(address account, uint256 sbtId, string name, string message);
@@ -58,7 +55,7 @@ contract UmaIrpiri {
         uint8 nivelDesconta;
         address wallet;
     }
-    
+
     uint256 public balanceSC;
 
     mapping(address => uint256[]) public registroProyectos;
@@ -67,13 +64,14 @@ contract UmaIrpiri {
     mapping(address => bool) public inversorLista;
     mapping(address => bool) public postulaLista;
     Proyecto[] public projectList;
-    
+
     mapping(uint8 => mapping(address => uint256)) public listaProyectosVotados;
-   
-    constructor() {
+
+    constructor(address UmaTokenAddress, address UmaSBTAddress) {
         // _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        umatokenInstance = UmaToken(0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE);
-        umasbtInstance = UmaSBT(0x3328358128832A260C76A4141e19E2A943CD4B6D);
+        umatokenInstance = UmaToken(UmaTokenAddress);
+        umasbtInstance = UmaSBT(UmaSBTAddress);
+
     }
 
     // Asignar UmaSBT al Inversor
@@ -120,14 +118,6 @@ contract UmaIrpiri {
             // emit proyectoCreado(_idProyecto, _nombre);
         }
 
-    function votarProyecto(address _cuenta, uint8 _idProyecto) public {       
-        // crear el proyecto ffff
-        // if(listaProyectosVotados[_idProyecto][_cuenta] >= Proyecto.presupuesto) {
-             
-        //     }          
-        // }
-    }
-
     // Crear Propuestas que se van a adicionar al UMA SBT
     function crearUmaSBT (address _cuenta, string memory _name, string memory country, uint256 timestamp) public {
             _soulData = UmaSBT.Soul({
@@ -139,24 +129,20 @@ contract UmaIrpiri {
         // hash crear un identificador
 
 
-        // SBT    
+        // SBT
         if (!umasbtInstance.hasSoul(_cuenta)) {
             console.log(_soulData.identity, _soulData.name, _soulData.country, _soulData.timestamp);
             umasbtInstance.mint(_cuenta, _soulData);
         } 
         emit umaSBTcreated(_cuenta, sbtCount-1, _name, "SBT minted successfully!");
     }
-    
+
     // Comprar token UMAToken para invertir
     function comprarUmaToken() external payable {
-        uint256 _miUma = 1000 * (msg.value / (10 ** 18));
+        uint256 _miUma = msg.value / (10 ** 18);
         require(msg.value >= 0 ,"Debe ser mayor que cero");
-        // address _cuentaSC = address(this);
         umatokenInstance.mint(msg.sender,_miUma);
-        // bool exitoTransfer = umatokenInstance.transferFrom(_cuenta, amount);
-        //uint256 _balance = umatokenInstance.balanceOf(_account);
         InversorBalance[msg.sender] = msg.value;
-        // quad
 
         emit purchaseUmaToken(msg.sender, _miUma, InversorBalance[msg.sender], "Token purchased successfully!");
     }
@@ -165,26 +151,9 @@ contract UmaIrpiri {
     // Inicio del Proyecto
     // function inicioFinancimiento() {}
 
-    // Actualizar estado del UMmaSBT
-    function actualizarUmaSBT() public {}
-
-    // Cerrar el Proyecto 
-    function cerrarFinanciamiento() public {}
-
 ///////////////////////////////////////////////////////////////////////////
 // OTRAS FUNCIONAIDADES 
 ///////////////////////////////////////////////////////////////////////////
-
-    function addToInversorList(address _cuenta) public //onlyRole(DEFAULT_ADMIN_ROLE) 
-    {
-        inversorLista[_cuenta] = true;
-    }
-
-    function removeFromInversorlist(address _cuenta) public //onlyRole(DEFAULT_ADMIN_ROLE)
-     {
-        inversorLista[_cuenta] = false;
-    }
-
     function accessProjectAtIndex(uint256 index) public view returns (Proyecto memory) {
         return projectList[index];
     }
@@ -192,4 +161,5 @@ contract UmaIrpiri {
     function getNumProy() public view returns (uint256) {
         return numProy;
     }
+
 }
