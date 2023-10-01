@@ -1,8 +1,9 @@
 import { useReducer } from "react";
 import Link from "next/link";
 import { ReusableForm } from "./common/ReusableForm";
+import { PrivateKeyAccount } from "viem";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { useBurnerWallet, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { FormType } from "~~/types/form.type";
 
 interface FormState {
@@ -33,7 +34,11 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
   }
 };
 
-const CreateSbt = () => {
+interface propsAccount {
+  account: PrivateKeyAccount | undefined;
+}
+
+const CreateSbt = ({ account }: propsAccount) => {
   const [formData, dispatch] = useReducer(formReducer, initialState);
   const MintSbt: FormType[] = [
     {
@@ -60,8 +65,6 @@ const CreateSbt = () => {
     dispatch({ type: "SET_FIELD", field: name, value });
   };
 
-  const { account } = useBurnerWallet();
-
   const { writeAsync, isLoading } = useScaffoldContractWrite({
     contractName: "UmaIrpiri",
     functionName: "crearUmaSBT",
@@ -83,27 +86,23 @@ const CreateSbt = () => {
     return (formData.country !== "" && formData.email !== "" && formData.name !== "") || isLoading;
   };
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed inset-0 bg-black opacity-50"></div>
-
-      <div className="bg-white text-gray p-10 absolute rounded-lg">
-        <h1 className="text-2xl mt-4 text-center">CREA TU SBT</h1>
-        <p className="w-72 text-center my-0">Necesitamos que crees un SBT para registrar las propuestas de proyectos</p>
-        <div className="mx-auto">
-          <ReusableForm
-            formData={MintSbt}
-            onSubmit={handleSubmit}
-            onChange={handleInputChange}
-            buttonLabel="Next"
-            disabled={!setDisabled()}
-          />
-        </div>
-        <div className="inline-flex ml-8 mt-[20px]">
-          <Link className="text-red-500 hover:text-red-700 underline" href={"/"}>
-            Go Back
-            <ArrowLeftIcon className="h-4 w-4" />
-          </Link>
-        </div>
+    <div className="bg-white text-gray p-10 absolute rounded-lg">
+      <h1 className="text-2xl mt-4 text-center">CREA TU SBT</h1>
+      <p className="w-72 text-center my-0">Necesitamos que crees un SBT para registrar las propuestas de proyectos</p>
+      <div className="mx-auto">
+        <ReusableForm
+          formData={MintSbt}
+          onSubmit={handleSubmit}
+          onChange={handleInputChange}
+          buttonLabel="Next"
+          disabled={!setDisabled()}
+        />
+      </div>
+      <div className="inline-flex ml-8 mt-[20px]">
+        <Link className="text-red-500 hover:text-red-700 underline" href={"/"}>
+          Go Back
+          <ArrowLeftIcon className="h-4 w-4" />
+        </Link>
       </div>
     </div>
   );
