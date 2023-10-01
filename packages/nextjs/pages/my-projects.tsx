@@ -46,6 +46,7 @@ const MyProjects: NextPage = () => {
                 description={x.description}
                 waterPurity={x.waterPurity}
                 saving={x.saving}
+                setButton={true}
               />
             </div>
           ))}
