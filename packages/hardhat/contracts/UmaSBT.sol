@@ -18,7 +18,7 @@ contract UmaSBT {
         uint256 timestamp;
     }
 
-    mapping (address => Soul) private souls;
+    mapping (address => Soul) public souls;
     mapping (address => mapping (address => Soul)) soulProfiles;
     mapping (address => address[]) private profiles;
 
