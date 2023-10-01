@@ -1,6 +1,5 @@
 import { FormType } from "~~/types/form.type";
 
-
 export const ChooseProjectForm: FormType[] = [
   {
     label: "Company",
@@ -9,10 +8,10 @@ export const ChooseProjectForm: FormType[] = [
     name: "company",
   },
   {
-    label: "Invesment",
+    label: "Investment",
     type: "number",
     value: 0,
-    name: "invesment",
+    name: "investment",
   },
   {
     label: "Company",
